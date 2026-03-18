@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-@dlt.resource(write_disposition="replace")
+@dlt.resource(write_disposition="replace", max_table_nesting=0)
 def pokemon_resource() -> Generator[Any, None, None]:
     """
     Extracts Pokemon data from PokéAPI with pagination.
@@ -20,8 +20,11 @@ def pokemon_resource() -> Generator[Any, None, None]:
         response.raise_for_status()
         data = response.json()
         
-        # Yield the list of pokemon results
-        yield data["results"]
+        # For each pokemon list result, fetch its details
+        for poke in data["results"]:
+            detail_response = requests.get(poke["url"])
+            detail_response.raise_for_status()
+            yield detail_response.json()
         
         # PokéAPI returns the next page URL in the 'next' key
         url = data.get("next")
@@ -32,7 +35,7 @@ def run_pipeline() -> None:
     """
     # Initialize the dlt pipeline as specified in the skill file
     pipeline = dlt.pipeline(
-        pipeline_name='pokeapi_pipeline',
+        pipeline_name='pokeapi_pipeline_v2',
         destination='filesystem',
         dataset_name='bronze_pokemon',
     )
