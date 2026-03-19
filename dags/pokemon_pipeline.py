@@ -19,7 +19,7 @@ with DAG(
     'pokemon_lakehouse_pipeline',
     default_args=default_args,
     description='End-to-end Pokemon Data Lakehouse Pipeline',
-    schedule_interval='@daily',
+    schedule='@daily',
     catchup=False,
     tags=['pokemon', 'lakehouse'],
 ) as dag:
