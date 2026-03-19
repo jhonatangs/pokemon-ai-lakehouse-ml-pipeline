@@ -1,0 +1,15 @@
+pandas
+s3fs
+scikit-learn
+joblib
+python-dotenv
+pyarrow
+pyspark
+dlt[s3]
+requests
+apache-airflow
+pendulum
+pytest
+boto3
+
+astro-run-dag # This package is needed for the astro run command. It will be removed before a deploy

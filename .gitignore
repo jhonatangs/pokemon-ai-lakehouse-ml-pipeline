@@ -1,6 +1,13 @@
 venv
 .env
+.env.*
 __pycache__/
 *.pyc
 .DS_Store
 models/
+.astro/
+logs/
+.pytest_cache/
+*.log
+.ipynb_checkpoints/
+include/
