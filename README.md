@@ -27,11 +27,9 @@ This project follows a professional data lakehouse pattern:
 ## 📂 Project Structure
 
 ```bash
-├── .github/          # CI/CD workflows
 ├── agent_skills/     # 🧠 Context files for AI-Assisted development
 ├── dags/             # ✈️ Airflow DAGs (Pipeline orchestration)
 ├── infra/            # 🐳 Docker Compose for MinIO & Infrastructure
-├── models/           # 🤖 Serialized ML models (.pkl)
 ├── src/              # 🏗️ Core Python scripts per layer
 │   ├── bronze/       # Ingestion logic (dlt)
 │   ├── silver/       # PySpark normalization
@@ -54,7 +52,7 @@ cd infra && docker-compose up -d
 ```
 
 ### 3. Environment Configuration
-Create a `.env` file in the root directory (refer to `agent_skills/dlt_ingestion/.env.example` for required keys).
+Create a `.env` file in the root directory (refer to `.env.example` for required keys).
 
 ### 4. Setup Environment
 ```bash
