@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from airflow import DAG
-from airflow.operators.bash import BashOperator
+from airflow.providers.standard.operators.bash import BashOperator
 
 # Senior Data Engineer: Orchestrating the Pokemon Lakehouse Pipeline
 # Following specifications from agent_skills/airflow_orchestration/airflow_orchestration.md
@@ -26,22 +26,26 @@ with DAG(
 
     run_bronze = BashOperator(
         task_id='run_bronze',
-        bash_command='python src/bronze/ingest_pokemon.py',
+        bash_command='PYTHONPATH=/usr/local/airflow python /usr/local/airflow/src/bronze/ingest_pokemon.py',
+        cwd='/tmp'
     )
 
     run_silver = BashOperator(
         task_id='run_silver',
         bash_command='python src/silver/process_pokemon.py',
+        cwd='/usr/local/airflow'
     )
 
     run_gold = BashOperator(
         task_id='run_gold',
         bash_command='python src/gold/create_features.py',
+        cwd='/usr/local/airflow'
     )
 
     train_ml = BashOperator(
         task_id='train_ml',
         bash_command='python src/ml/train_model.py',
+        cwd='/usr/local/airflow'
     )
 
     # Execution Flow: Bronze -> Silver -> Gold -> ML
