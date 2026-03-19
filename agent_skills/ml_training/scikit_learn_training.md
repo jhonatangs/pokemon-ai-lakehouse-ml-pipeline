@@ -25,5 +25,5 @@ Read the feature dataset from the Gold layer in MinIO, train a Machine Learning 
 ## 4. Evaluation and Serialization
 * Predict on the test set using the best pipeline.
 * Print the `classification_report` and overall accuracy to the console.
-* Create a local directory named `models/` at the root of the project if it doesn't exist.
-* Use `joblib` to save the trained pipeline (features + scaler + model) to `models/pokemon_type_model.pkl`.
+* Crucial: Do not save the model to the local disk.
+* Use the s3fs library to configure a filesystem connection using the AWS environment variables. Open a file stream to pokemon-lake/models/pokemon_type_model.pkl and use joblib.dump to write the trained best_estimator_ pipeline directly to the MinIO bucket.

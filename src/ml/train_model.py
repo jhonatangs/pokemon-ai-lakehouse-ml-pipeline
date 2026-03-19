@@ -1,6 +1,7 @@
 import os
 import joblib
 import pandas as pd
+import s3fs
 from typing import Tuple, Dict, Any
 from dotenv import load_dotenv
 from sklearn.model_selection import train_test_split, GridSearchCV
@@ -86,14 +87,21 @@ def train_and_evaluate() -> None:
     print("\nClassification Report:")
     print(classification_report(y_test, y_pred, zero_division=0))
     
-    # Serialization
-    models_dir: str = "models"
-    if not os.path.exists(models_dir):
-        os.makedirs(models_dir)
+    # Serialization to MinIO
+    print("\nSerializing model to MinIO...")
+    
+    # Configure s3fs filesystem
+    fs = s3fs.S3FileSystem(
+        key=os.environ["AWS_ACCESS_KEY_ID"],
+        secret=os.environ["AWS_SECRET_ACCESS_KEY"],
+        client_kwargs={"endpoint_url": os.environ["AWS_ENDPOINT_URL_S3"]}
+    )
+    
+    model_output: str = "pokemon-lake/models/pokemon_type_model.pkl"
+    with fs.open(model_output, "wb") as f:
+        joblib.dump(best_pipeline, f)
         
-    model_output: str = os.path.join(models_dir, "pokemon_type_model.pkl")
-    joblib.dump(best_pipeline, model_output)
-    print(f"Improved model saved to: {model_output}")
+    print(f"Improved model saved to: s3://{model_output}")
 
 if __name__ == "__main__":
     train_and_evaluate()
