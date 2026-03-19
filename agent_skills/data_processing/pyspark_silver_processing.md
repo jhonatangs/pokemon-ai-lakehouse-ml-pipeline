@@ -17,7 +17,7 @@ Required configurations:
 ## 3. Data Transformations
 * Read data from: s3a://pokemon-lake/bronze_pokemon/
 * Extract the Pokemon ID: Parse it from the URL column if it exists.
-* Extract Stats: Unpack base stats (hp, attack, defense, speed) into separate columns.
+* Extract Stats: Unpack base stats (hp, attack, defense, special_attack, special_defense, speed) into separate columns.
 * Extract Types: Extract the primary_type and secondary_type from the nested types array.
 * Drop unnecessary raw metadata columns to keep the DataFrame clean.
 

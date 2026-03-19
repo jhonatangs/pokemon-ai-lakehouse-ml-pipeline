@@ -50,7 +50,7 @@ def create_spark_session() -> SparkSession:
 
 def select_features_and_target(df: DataFrame) -> DataFrame:
     """Selects and casts features and target column."""
-    features = ["hp", "attack", "defense", "speed", "height", "weight"]
+    features = ["hp", "attack", "defense", "special_attack", "special_defense", "speed", "height", "weight"]
     target = "primary_type"
     
     # Cast features to Double and target to String

@@ -52,11 +52,13 @@ def extract_pokemon_id(df: DataFrame) -> DataFrame:
 
 def extract_stats(df: DataFrame) -> DataFrame:
     """
-    Unpacks base stats (hp, attack, defense, speed) from the nested stats array.
+    Unpacks base stats (hp, attack, defense, special-attack, special-defense, speed) from the nested stats array.
     """
     return df.withColumn("hp", F.expr("filter(stats, x -> x.stat.name == 'hp')[0].base_stat")) \
              .withColumn("attack", F.expr("filter(stats, x -> x.stat.name == 'attack')[0].base_stat")) \
              .withColumn("defense", F.expr("filter(stats, x -> x.stat.name == 'defense')[0].base_stat")) \
+             .withColumn("special_attack", F.expr("filter(stats, x -> x.stat.name == 'special-attack')[0].base_stat")) \
+             .withColumn("special_defense", F.expr("filter(stats, x -> x.stat.name == 'special-defense')[0].base_stat")) \
              .withColumn("speed", F.expr("filter(stats, x -> x.stat.name == 'speed')[0].base_stat"))
 
 def extract_types(df: DataFrame) -> DataFrame:
@@ -90,6 +92,8 @@ def process_silver() -> None:
         F.col("hp"),
         F.col("attack"),
         F.col("defense"),
+        F.col("special_attack"),
+        F.col("special_defense"),
         F.col("speed"),
         F.col("primary_type"),
         F.col("secondary_type"),
