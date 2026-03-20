@@ -85,7 +85,6 @@ API -- "3. Returns Type" --> EndUser
 
 ## 📂 Project Structure
 
-    ├── .github/          # CI/CD workflows
     ├── agent_skills/     # 🧠 Context files for AI-Assisted development
     ├── dags/             # ✈️ Airflow DAGs (Pipeline orchestration)
     ├── infra/            # 🐳 Docker Compose for MinIO & Infrastructure
