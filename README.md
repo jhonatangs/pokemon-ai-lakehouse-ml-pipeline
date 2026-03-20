@@ -15,23 +15,6 @@ Built with an **AI-Assisted Development** workflow using **Google Antigravity**.
 
 This project follows a professional data lakehouse pattern:
 
-# ⚡ Pokémon AI Lakehouse & ML Pipeline ⚡
-
-[![Airflow](https://img.shields.io/badge/Orchestration-Apache%20Airflow-017CEE?logo=apache-airflow&logoColor=white)](https://airflow.apache.org/)
-[![Spark](https://img.shields.io/badge/Processing-PySpark-E25A1C?logo=apache-spark&logoColor=white)](https://spark.apache.org/)
-[![Scikit-Learn](https://img.shields.io/badge/ML-Scikit--Learn-F7931E?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
-[![FastAPI](https://img.shields.io/badge/Serving-FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-
-An end-to-end Data Engineering and Machine Learning project that extracts Pokémon data from the PokéAPI, processes it via a **Medallion Architecture**, and trains a state-of-the-art classifier to predict a Pokémon's primary type based on its combat stats and physical characteristics.
-
-Built with an **AI-Assisted Development** workflow using **Google Antigravity**.
-
----
-
-## 🏗️ Architecture & Tech Stack
-
-This project follows a professional data lakehouse pattern:
-
 ```mermaid
 graph TD
 %% Definindo Estilos para visualização
